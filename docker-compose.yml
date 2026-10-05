@@ -1,0 +1,10 @@
+# 需本机安装 Docker Desktop 后使用：docker compose up -d --build
+services:
+  study-agent:
+    build: .
+    ports:
+      - "8030:8000"   # 容器内 uvicorn 监听 8000（见 Dockerfile CMD），映射到宿主机 8030
+    environment:
+      LLM_PROVIDER: mock        # 生产可切 openai_compatible 并注入 KEY
+      # OPENAI_API_KEY: sk-xxx
+    restart: unless-stopped

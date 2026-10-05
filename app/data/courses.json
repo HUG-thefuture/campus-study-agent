@@ -1,0 +1,29 @@
+{
+  "semester_start": "2026-08-31",
+  "courses": [
+    {"course_id": "C001", "name": "数据结构与算法", "credits": 4, "teacher": "张伟",
+     "schedule": ["周一 3-4节", "周三 1-2节"], "classroom": "教三-201",
+     "aliases": ["数据结构"]},
+    {"course_id": "C002", "name": "操作系统", "credits": 4, "teacher": "李强",
+     "schedule": ["周二 3-4节", "周四 1-2节"], "classroom": "教三-305",
+     "aliases": ["OS"]},
+    {"course_id": "C003", "name": "计算机网络", "credits": 3, "teacher": "王芳",
+     "schedule": ["周一 1-2节", "周五 3-4节"], "classroom": "教二-110",
+     "aliases": ["网络"]},
+    {"course_id": "C004", "name": "数据库系统", "credits": 3, "teacher": "刘洋",
+     "schedule": ["周一 3-4节", "周四 3-4节"], "classroom": "教二-204",
+     "aliases": ["数据库"]},
+    {"course_id": "C005", "name": "机器学习导论", "credits": 3, "teacher": "陈静",
+     "schedule": ["周三 3-4节", "周五 1-2节"], "classroom": "教五-301",
+     "aliases": ["机器学习"]},
+    {"course_id": "C006", "name": "高等数学（下）", "credits": 5, "teacher": "赵磊",
+     "schedule": ["周二 1-2节", "周四 3-4节"], "classroom": "教一-102",
+     "aliases": ["高数", "高等数学"]},
+    {"course_id": "C007", "name": "大学英语（四）", "credits": 2, "teacher": "孙悦",
+     "schedule": ["周五 1-2节"], "classroom": "文楼-305",
+     "aliases": ["英语"]},
+    {"course_id": "C008", "name": "软件工程实践", "credits": 2, "teacher": "周明",
+     "schedule": ["周三 1-2节"], "classroom": "实验楼-402",
+     "aliases": ["软工"]}
+  ]
+}

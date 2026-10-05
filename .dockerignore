@@ -1,0 +1,13 @@
+# 构建镜像时排除本机数据与开发产物，防止演示轨迹库被打进镜像
+app/data/
+.venv/
+venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+_archive_*/
+tests/
+README.md
+Dockerfile
+.dockerignore

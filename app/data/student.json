@@ -1,0 +1,51 @@
+{
+  "name": "冯同学",
+  "student_id": "20231001",
+  "enrolled": [
+    "C001",
+    "C003",
+    "C006"
+  ],
+  "grades": [
+    {
+      "course_id": "C001",
+      "credit": 4,
+      "score": 92
+    },
+    {
+      "course_id": "C003",
+      "credit": 3,
+      "score": 85
+    },
+    {
+      "course_id": "C006",
+      "credit": 5,
+      "score": 78
+    },
+    {
+      "course_id": "C007",
+      "credit": 2,
+      "score": 88
+    },
+    {
+      "course_id": "C002",
+      "credit": 4,
+      "score": 88
+    },
+    {
+      "course_id": "C004",
+      "credit": 3,
+      "score": 91
+    },
+    {
+      "course_id": "C005",
+      "credit": 2,
+      "score": 84
+    },
+    {
+      "course_id": "C008",
+      "credit": 3,
+      "score": 86
+    }
+  ]
+}

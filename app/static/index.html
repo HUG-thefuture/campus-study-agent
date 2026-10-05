@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>校园学习助理 Agent · 演示台</title>
+<style>
+:root{--bg:#f5f7fa;--card:#fff;--main:#2f6fed;--text:#1f2329;--muted:#8a919f;--line:#e5e8ef}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;display:flex;justify-content:center}
+.wrap{width:100%;max-width:760px;min-height:100vh;display:flex;flex-direction:column}
+header{padding:14px 20px;background:var(--card);border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:17px}
+header .sub{color:var(--muted);font-size:12px}
+#chat{flex:1;padding:16px 20px;overflow-y:auto}
+.msg{margin:10px 0;display:flex}
+.msg.me{justify-content:flex-end}
+.bubble{max-width:86%;padding:10px 14px;border-radius:12px;background:var(--card);border:1px solid var(--line);white-space:pre-wrap;word-break:break-word}
+.me .bubble{background:var(--main);color:#fff;border-color:var(--main)}
+.trace{margin-top:8px;font-size:12px;color:var(--muted)}
+.trace summary{cursor:pointer;user-select:none}
+.trace .step{margin:4px 0;padding:6px 8px;background:#f8f9fc;border:1px solid var(--line);border-radius:8px;font-family:Consolas,monospace;white-space:pre-wrap;word-break:break-all}
+.s-ok{color:#1a7f37}.s-bad{color:#c0392b}
+.pending{margin:10px 20px;padding:10px 14px;background:#fff8e6;border:1px solid #f0d264;border-radius:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pending .t{flex:1;min-width:200px;font-size:14px}
+button{font:inherit;cursor:pointer}
+.pending button{padding:6px 18px;border:0;border-radius:8px}
+#btn-ok{background:#1a7f37;color:#fff}
+#btn-cancel{background:#eef0f4;color:var(--text)}
+#chips{padding:4px 20px;display:flex;gap:8px;flex-wrap:wrap}
+#chips button{border:1px solid var(--line);background:var(--card);border-radius:16px;padding:5px 12px;font-size:13px;color:var(--main)}
+#chips button:hover{background:#eef3ff}
+form{display:flex;gap:10px;padding:12px 20px 18px;background:var(--card);border-top:1px solid var(--line)}
+#q{flex:1;padding:11px 14px;border:1px solid var(--line);border-radius:10px;font:inherit;outline:none}
+#q:focus{border-color:var(--main)}
+form button{padding:0 22px;border:0;border-radius:10px;background:var(--main);color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>校园学习助理 Agent</h1>
+  <span class="sub">自研 ReAct 循环 · 8 个工具 · 写操作确认门 · 轨迹可回放（GET /traces/{session}）</span>
+</header>
+<div id="chat"></div>
+<div class="pending" id="pending" hidden>
+  <span class="t">写操作待确认：上一步不会真正执行，确认后按回显参数原样落库。</span>
+  <button id="btn-ok">确认执行</button><button id="btn-cancel">取消</button>
+</div>
+<div id="chips"></div>
+<form id="f">
+  <input id="q" placeholder="试试：我这周有什么作业 / 查一下C002的作业有哪些，再介绍下这门课" autocomplete="off">
+  <button>发送</button>
+</form>
+</div>
+<script>
+const CHIPS = [
+  "我这周有什么作业",
+  "查一下C002的作业有哪些，再介绍下这门课",
+  "C004和我的课冲突吗",
+  "我的GPA是多少",
+  "帮我制定三天的学习计划",
+  "三次握手是什么",
+  "创建任务：复习操作系统第三章",
+  "添加知识点：CAP理论。分布式系统三者不可兼得，常取舍为CP或AP。",
+  "区块链是什么"
+];
+const sid = "web-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 6);
+const chat = document.getElementById("chat");
+
+function el(html) {
+  const t = document.createElement("template");
+  t.innerHTML = html.trim();
+  return t.content.firstChild;
+}
+function scroll() { chat.scrollIntoView && window.scrollTo(0, document.body.scrollHeight); }
+function userMsg(text) {
+  const w = el(`<div class="msg me"><div class="bubble"></div></div>`);
+  w.querySelector(".bubble").textContent = text;
+  chat.appendChild(w); scroll();
+}
+function botMsg(text, steps) {
+  const w = el(`<div class="msg"><div class="bubble"></div></div>`);
+  const b = w.querySelector(".bubble");
+  b.textContent = text || "(空)";
+  if (steps && steps.length) {
+    const det = el(`<details class="trace"><summary>工具轨迹（${steps.length} 步）</summary></details>`);
+    for (const s of steps) {
+      const div = el(`<div class="step ${s.ok ? "s-ok" : "s-bad"}"></div>`);
+      div.textContent =
+        (s.ok ? "✓ " : "✗ ") + s.tool + "(" + JSON.stringify(s.args || {}) + ")" +
+        (s.ok ? " → " + JSON.stringify(s.observation).slice(0, 140)
+              : (s.error ? " → " + s.error : ""));
+      det.appendChild(div);
+    }
+    b.appendChild(det);
+  }
+  chat.appendChild(w); scroll();
+}
+async function send(text, confirm) {
+  if (!text || !text.trim()) return;
+  userMsg(text);
+  try {
+    const r = await fetch("/agent/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: text, session_id: sid, confirm: !!confirm })
+    });
+    if (!r.ok) { botMsg("请求失败：HTTP " + r.status, []); return; }
+    const d = await r.json();
+    botMsg(d.answer, d.steps || []);
+    document.getElementById("pending").hidden =
+      !(d.steps || []).some(s => s.needs_confirm);
+  } catch (e) { botMsg("网络错误：" + e.message, []); }
+}
+document.getElementById("f").addEventListener("submit", e => {
+  e.preventDefault();
+  const q = document.getElementById("q");
+  send(q.value); q.value = "";
+});
+document.getElementById("btn-ok").addEventListener("click", () => {
+  document.getElementById("pending").hidden = true; send("确认", true);
+});
+document.getElementById("btn-cancel").addEventListener("click", () => {
+  document.getElementById("pending").hidden = true; send("取消");
+});
+const chips = document.getElementById("chips");
+for (const c of CHIPS) {
+  const b = document.createElement("button");
+  b.textContent = c; b.onclick = () => send(c);
+  chips.appendChild(b);
+}
+botMsg("你好，我是校园学习助理。可以查课程/作业、检查选课冲突、算 GPA、排学习计划、查知识点，"
+  + "也能帮你创建学习任务、登记知识点——写操作会先回显参数，经你确认后才落库。"
+  + "点下方快捷问题开始，或直接输入。", []);
+</script>
+</body>
+</html>

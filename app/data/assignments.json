@@ -1,0 +1,226 @@
+[
+  {
+    "assignment_id": "A101",
+    "course_id": "C001",
+    "title": "实验三：二叉树遍历实现",
+    "due": "2026-09-08",
+    "week": 2
+  },
+  {
+    "assignment_id": "A102",
+    "course_id": "C006",
+    "title": "习题册第3章：极限与连续",
+    "due": "2026-09-09",
+    "week": 2
+  },
+  {
+    "assignment_id": "A107",
+    "course_id": "C004",
+    "title": "ER图设计作业",
+    "due": "2026-09-10",
+    "week": 2
+  },
+  {
+    "assignment_id": "A103",
+    "course_id": "C003",
+    "title": "Socket编程小作业",
+    "due": "2026-09-11",
+    "week": 2
+  },
+  {
+    "assignment_id": "A104",
+    "course_id": "C002",
+    "title": "作业2：进程调度算法",
+    "due": "2026-09-14",
+    "week": 3
+  },
+  {
+    "assignment_id": "A105",
+    "course_id": "C005",
+    "title": "阅读报告：决策树",
+    "due": "2026-09-16",
+    "week": 3
+  },
+  {
+    "assignment_id": "A108",
+    "course_id": "C007",
+    "title": "口语展示准备",
+    "due": "2026-09-18",
+    "week": 3
+  },
+  {
+    "assignment_id": "A106",
+    "course_id": "C001",
+    "title": "期中复习提纲整理",
+    "due": "2026-09-21",
+    "week": 4
+  },
+  {
+    "assignment_id": "A109",
+    "course_id": "C008",
+    "title": "小组项目里程碑1：需求文档",
+    "due": "2026-09-25",
+    "week": 4
+  },
+  {
+    "assignment_id": "A112",
+    "course_id": "C005",
+    "title": "编程作业：KNN分类器",
+    "due": "2026-09-28",
+    "week": 5
+  },
+  {
+    "assignment_id": "A110",
+    "course_id": "C006",
+    "title": "数学建模选做题",
+    "due": "2026-09-04",
+    "week": 1
+  },
+  {
+    "assignment_id": "A111",
+    "course_id": "C002",
+    "title": "实验报告1：环境搭建",
+    "due": "2026-09-02",
+    "week": 1
+  },
+  {
+    "assignment_id": "A113",
+    "course_id": "C002",
+    "title": "实验五：页面置换算法模拟",
+    "due": "2026-09-29",
+    "week": 5
+  },
+  {
+    "assignment_id": "A114",
+    "course_id": "C004",
+    "title": "索引与查询优化实验",
+    "due": "2026-10-01",
+    "week": 5
+  },
+  {
+    "assignment_id": "A115",
+    "course_id": "C008",
+    "title": "需求规格说明书（迭代二）",
+    "due": "2026-10-03",
+    "week": 5
+  },
+  {
+    "assignment_id": "A116",
+    "course_id": "C003",
+    "title": "Socket 聊天室编程",
+    "due": "2026-10-07",
+    "week": 6
+  },
+  {
+    "assignment_id": "A117",
+    "course_id": "C005",
+    "title": "线性回归与梯度下降实现",
+    "due": "2026-10-09",
+    "week": 6
+  },
+  {
+    "assignment_id": "A118",
+    "course_id": "C006",
+    "title": "级数收敛性习题（六）",
+    "due": "2026-10-11",
+    "week": 6
+  },
+  {
+    "assignment_id": "A119",
+    "course_id": "C001",
+    "title": "实验六：最短路径 Dijkstra",
+    "due": "2026-10-14",
+    "week": 7
+  },
+  {
+    "assignment_id": "A120",
+    "course_id": "C007",
+    "title": "视听说 Unit5 测验",
+    "due": "2026-10-16",
+    "week": 7
+  },
+  {
+    "assignment_id": "A121",
+    "course_id": "C002",
+    "title": "进程调度实验报告",
+    "due": "2026-10-21",
+    "week": 8
+  },
+  {
+    "assignment_id": "A122",
+    "course_id": "C008",
+    "title": "原型评审与用例更新",
+    "due": "2026-10-23",
+    "week": 8
+  },
+  {
+    "assignment_id": "A123",
+    "course_id": "C003",
+    "title": "Wireshark 抓包分析报告",
+    "due": "2026-10-28",
+    "week": 9
+  },
+  {
+    "assignment_id": "A124",
+    "course_id": "C004",
+    "title": "事务与并发控制案例分析",
+    "due": "2026-10-30",
+    "week": 9
+  },
+  {
+    "assignment_id": "A125",
+    "course_id": "C005",
+    "title": "决策树调参与实验报告",
+    "due": "2026-11-04",
+    "week": 10
+  },
+  {
+    "assignment_id": "A126",
+    "course_id": "C001",
+    "title": "红黑树插入删除练习",
+    "due": "2026-11-07",
+    "week": 10
+  },
+  {
+    "assignment_id": "A127",
+    "course_id": "C006",
+    "title": "多元微分作业（三）",
+    "due": "2026-11-11",
+    "week": 11
+  },
+  {
+    "assignment_id": "A128",
+    "course_id": "C007",
+    "title": "作文：AI 时代的学习方式",
+    "due": "2026-11-14",
+    "week": 11
+  },
+  {
+    "assignment_id": "A129",
+    "course_id": "C008",
+    "title": "迭代三验收演示",
+    "due": "2026-11-19",
+    "week": 12
+  },
+  {
+    "assignment_id": "A130",
+    "course_id": "C002",
+    "title": "文件系统实验",
+    "due": "2026-11-21",
+    "week": 12
+  },
+  {
+    "assignment_id": "A131",
+    "course_id": "C001",
+    "title": "期末综合：迷宫求解（BFS/DFS）",
+    "due": "2026-11-26",
+    "week": 13
+  },
+  {
+    "assignment_id": "A132",
+    "course_id": "C004",
+    "title": "ER 建模大作业",
+    "due": "2026-12-02",
+    "week": 14
+  }
+]
