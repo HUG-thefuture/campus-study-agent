@@ -297,3 +297,5 @@ Kimi 等兼容接口，改 `OPENAI_BASE_URL` 和 `OPENAI_MODEL` 即可）。**�
 - **产品入口**：`uvicorn app.main:app --port 8010` 后浏览器打开 **/demo**——聊天式演示台，工具轨迹可展开、写操作出现确认/取消按钮。
 - **成功指标（实测）**：86 例 pytest 全绿；30 条评测离线可复现；写操作 0 次未确认落库（测试锚定）。
 - **未来计划**：知识检索工具接入 RAG 后端（见 course-kb-qa）；真实 LLM 模式的回归评测；移动端适配。
+
+> **2026-10-27 Docker Desktop 29.9.2 本机实测**：修复 `.dockerignore` 误排除 `app/data/` 种子数据（原镜像启动即崩，只应排除轨迹库 `agent.db`）；`docker compose up -d --build` 后 `/demo` 返回 200，容器内 `POST /agent/chat` 走通 ReAct 工具调用与写操作确认门（`confirm:true` 原样重放后落库“已创建任务 #1：背50个单词”）。
